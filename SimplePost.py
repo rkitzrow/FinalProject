@@ -1,8 +1,7 @@
-#A user submits text and this flask returns the tokens from that test
+#This flask asks users to select a coin, investment value, and investment date and will return the current worth
 
 from flask import Flask, render_template, request, render_template_string
-import nltk
-nltk.download('punkt')
+
 
 
 app = Flask(__name__)
@@ -14,7 +13,9 @@ def my_form():
 @app.route('/', methods=['POST'])
 def my_form_post():
     coin = request.form.get('selectCoin')
-    return render_template_string('If you invested [x dollars] in {{ what }}', what = coin)
+    investment = request.form.get('investValue')
+    timeline = request.form.get('investDate')
+    return render_template_string('If you invested {{ much }} US Dollars in {{ what }} on {{ when }} that would now be worth [x dollars]', what = coin, much = investment, when = timeline)
 
 
 if __name__ == "__main__":
