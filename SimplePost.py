@@ -1,9 +1,9 @@
 #A user submits text and this flask returns the tokens from that test
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, render_template_string
 import nltk
 nltk.download('punkt')
-from nltk import word_tokenize
+
 
 app = Flask(__name__)
 
@@ -13,9 +13,8 @@ def my_form():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    text = request.form['text']
-    stuff = word_tokenize(text)
-    return jsonify(stuff)
+    coin = request.form.get('selectCoin')
+    return render_template_string('If you invested [x dollars] in {{ what }}', what = coin)
 
 
 if __name__ == "__main__":
