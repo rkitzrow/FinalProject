@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Cryptocurrency Investment Calculator</h2>
+<p>Pick a cryptocurrency, an investment value, and an investment date to learn what that investment would be worth today</p>
+<form method="post" action="process.php">
+  Pick Your Coin:
+  <select name="selectCoin">
+    <option value="BTC">BTC</option>
+    <option value="LTC">LTC</option>
+    <option value="ETH">ETH</option>
+  </select>
+<br>
+<br>
+  Pick Your Investment (in USD):
+  <input type="number" name="quantity" min="1" max="1000000000000000" />
+<br>
+<br>
+  Pick Your Investment Date:
+  <input type="date" name="invest">
+ <br>
+ <br>
+ <br>
+  <input type="submit" value="Submit the form"/>
+</form>
+<br>
+<br>
+<p><strong>Note:</strong> When selecting BTC, LTC, or ETH, the earliest respective investment dates are 4/7/2013, 10/24/2013, and 8/7/2015</p>
+
+</body>
+</html>
