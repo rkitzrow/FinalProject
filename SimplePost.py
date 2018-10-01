@@ -1,9 +1,10 @@
 #This flask asks users to select a coin, investment value, and investment date and will return the current worth
 
 from flask import Flask, render_template, request, render_template_string
-from datetime import datetime
 import time
+import calendar
 import requests
+from money import Money
 import pandas as pd
 
 app = Flask(__name__)
@@ -23,12 +24,8 @@ def my_form_post():
     #Here I compare these inputs agianst historical data
     # step 1, need to convert timeline to datetime to unix
     date_str = timeline
-    format_str = "%Y-%m-%dT%H:%M:%S%z"
-    addtime = 'T00:00:00-0000'
-    comb_str = timeline + addtime
-    datetime_obj = datetime.strptime(comb_str, format_str)
-    unixtime = (time.mktime(datetime_obj.timetuple())) - 14400
-    unixtime = int(str(unixtime)[:10])
+    format_str = "%Y-%m-%d"
+    unixtime = calendar.timegm(time.strptime(timeline, "%Y-%m-%d"))
 
     # Step 2, call the api to get previous and current values
     d = requests.get(
@@ -43,6 +40,9 @@ def my_form_post():
     calc2 = int(orig["open"])
     pct = ((calc1 - calc2) / calc2)
     investmentToday = int(investment) + ((int(investment)) * pct)
+    investmentToday = str(round(investmentToday, 2))
+    investmentToday = Money(investmentToday, 'USD')
+    investmentToday.format('en_US')
 
 
     #for debugging purposes I will print out the inputs
