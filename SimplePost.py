@@ -100,9 +100,27 @@ def my_form_post():
     # select only columns for graph
     return_plot = pd.DataFrame(df_return, columns=["time", "return"])
 
+    # max return value for annotation
+    ymax_index = int((np.argmax(return_plot['return'])))
+    ymax = return_plot['return'].loc[ymax_index]
+    xpos_max = return_plot['time'].loc[ymax_index]
+
+    # min return value for annotation
+    ymin_index = int((np.argmin(return_plot['return'])))
+    ymin = return_plot['return'].loc[ymin_index]
+    xpos_min = return_plot['time'].loc[ymin_index]
+
     # plot graph using seaborn
     img = io.BytesIO()
     plt.figure(figsize=(10,3))
+
+    # annotation
+    plt.annotate('Max Value', xy=(xpos_max, ymax), xytext=(xpos_max, ymax),
+                 horizontalalignment='right', verticalalignment='bottom')
+
+    plt.annotate('Min Value', xy=(xpos_min, ymin), xytext=(xpos_min, ymin),
+                 horizontalalignment='right', verticalalignment='top')
+
     sns.lineplot(x='time', y='return', data=return_plot)
     plt.title("Return of Your Investment Over Time")
     plt.xlabel("Time of Investment")
