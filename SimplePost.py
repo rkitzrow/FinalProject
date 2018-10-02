@@ -13,6 +13,8 @@ import numpy as np
 import seaborn as sns
 import base64
 import io
+import matplotlib
+matplotlib.use('Agg')
 
 app = Flask(__name__)
 
@@ -104,22 +106,30 @@ def my_form_post():
     ymax_index = int((np.argmax(return_plot['return'])))
     ymax = return_plot['return'].loc[ymax_index]
     xpos_max = return_plot['time'].loc[ymax_index]
+    xmax = return_plot['time'].loc[ymax_index]
 
     # min return value for annotation
     ymin_index = int((np.argmin(return_plot['return'])))
     ymin = return_plot['return'].loc[ymin_index]
     xpos_min = return_plot['time'].loc[ymin_index]
+    xmin = return_plot['time'].loc[ymin_index]
 
     # plot graph using seaborn
     img = io.BytesIO()
     plt.figure(figsize=(10,3))
 
     # annotation
-    plt.annotate('Max Value', xy=(xpos_max, ymax), xytext=(xpos_max, ymax),
-                 horizontalalignment='right', verticalalignment='bottom')
+    plt.annotate('Max Value on %s' % xmax, xy=(xpos_max, ymax),
+                 xycoords='data',
+                 xytext=(40, 5), textcoords='offset points',
+                 arrowprops=dict(arrowstyle="->"),
+                 horizontalalignment='left', verticalalignment='top')
 
-    plt.annotate('Min Value', xy=(xpos_min, ymin), xytext=(xpos_min, ymin),
-                 horizontalalignment='right', verticalalignment='top')
+    plt.annotate('Min Value on %s' % xmin, xy=(xpos_min, ymin),
+                 xycoords='data',
+                 xytext=(30, 60), textcoords='offset points',
+                 arrowprops=dict(arrowstyle="->"),
+                 horizontalalignment='left', verticalalignment='bottom')
 
     sns.lineplot(x='time', y='return', data=return_plot)
     plt.title("Return of Your Investment Over Time")
@@ -134,6 +144,8 @@ def my_form_post():
 
     #Here I combine the inputs with the comparision calculations to respond to the user
     return render_template('return_page.html', what=coin, much=investment, when=timeline, moola=investmentToday, graph_url=graph_url)
+
+
 
 if __name__ == "__main__":
     app.run(port=8004)
