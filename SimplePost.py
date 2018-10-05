@@ -16,7 +16,10 @@ import io
 import matplotlib
 matplotlib.use('Agg')
 
+
+
 app = Flask(__name__)
+
 
 #Here I am setting up the template for the data entry page
 @app.route('/')
@@ -53,11 +56,6 @@ def my_form_post():
     investmentToday = Money(investmentToday, 'USD')
     investmentToday.format('en_US')
 
-
-    #for debugging purposes I will print out the inputs
-    print(coin)
-    print(investment)
-    print(timeline)
 
     #Here I create the plot
     # step 1, need to convert timeline to datetime to unix
@@ -138,14 +136,31 @@ def my_form_post():
     plt.savefig(img, format='png')
     img.seek(0)
     graph_url = base64.b64encode(img.getvalue()).decode()
-    plt.close()
-
+    plt.clf()
+    plt.cla()
+    plt.close('all')
 
 
     #Here I combine the inputs with the comparision calculations to respond to the user
     return render_template('return_page.html', what=coin, much=investment, when=timeline, moola=investmentToday, graph_url=graph_url)
 
+#I created 404 and 500 errors (although using the same html message)
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 500
+
+#Issues: currently getting the following error when making a second call. Appears to be rooted in matplotlib
+#RuntimeError: main thread is not in main loop
+#Tcl_AsyncDelete: async handler deleted by the wrong thread
+
+
 
 
 if __name__ == "__main__":
-    app.run(port=8004)
+    app.run(debug=False, port=8004)
