@@ -163,4 +163,4 @@ def internal_error(e):
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=8004)
+    app.run(debug=False, port=8004, host='0.0.0.0')
