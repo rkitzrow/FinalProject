@@ -1,6 +1,8 @@
 #This flask asks users to select a coin, investment value, and investment date and will return the current worth
+#This flask will also return a plot of the coin returns from the initial investment date to today
 
-from flask import Flask, render_template, request, render_template_string
+#I import all the packages and libraries needed for this app
+from flask import Flask, render_template, request
 import time
 import calendar
 import requests
@@ -8,7 +10,6 @@ from money import Money
 import pandas as pd
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-whitegrid')
-import datetime
 import numpy as np
 import seaborn as sns
 import base64
@@ -17,7 +18,7 @@ import matplotlib
 matplotlib.use('Agg')
 
 
-
+#I set the app name
 app = Flask(__name__)
 
 
@@ -26,26 +27,26 @@ app = Flask(__name__)
 def my_form():
     return render_template('three_button_form.html')
 
-#Here I am defining the operations of the app and what the app will return
-@app.route('/', methods=['GET' , 'POST'])
+#Here I am defining the operations of the app and what the app will return. Is accepts post only right now
+@app.route('/', methods=['POST'])
 def my_form_post():
     coin = request.form.get('selectCoin')
     investment = request.form.get('investValue')
     timeline = request.form.get('investDate')
 
-    #Here I compare these inputs agianst historical data
-    # step 1, need to convert timeline to datetime to unix
+    # Here I compare these inputs agianst historical data
+    # I need to convert timeline to datetime to unix
     date_str = timeline
     format_str = "%Y-%m-%d"
     unixtime = calendar.timegm(time.strptime(timeline, "%Y-%m-%d"))
 
-    # Step 2, call the api to get previous and current values
+    # I need to  call the api to get previous and current values
     d = requests.get(
         "https://min-api.cryptocompare.com/data/histoday?fsym=" + coin + "&tsym=USD&limit=1000000000").json()
     df = pd.DataFrame.from_dict(d['Data'])
     df = df[['time', 'close', 'open']]
 
-    # step 2, calc % change (current-original/original) then investment + (investment * % change) = investmentToday
+    # I need to calc % change (current-original/original) then investment + (investment * % change) = investmentToday
     orig = df.loc[df['time'] == unixtime]
     today = df.tail(1)
     calc1 = int(today["open"])
@@ -58,18 +59,18 @@ def my_form_post():
 
 
     #Here I create the plot
-    # step 1, need to convert timeline to datetime to unix
+    # I need to convert timeline to datetime to unix
     date_str = timeline
     format_str = "%Y-%m-%d"
     unixtime = calendar.timegm(time.strptime(timeline, "%Y-%m-%d"))
 
-    # Step 2, call the api to get previous and current values
+    # I need to call the api to get previous and current values
     d = requests.get(
         "https://min-api.cryptocompare.com/data/histoday?fsym=" + coin + "&tsym=USD&limit=1000000000").json()
     df = pd.DataFrame.from_dict(d['Data'])
     df = df[['time', 'close', 'open']]
 
-    # step 2, calc % change (current-original/original) then investment + (investment * % change) = investmentToday
+    # I need to calc % change (current-original/original) then investment + (investment * % change) = investmentToday
     orig = df.loc[df['time'] == unixtime]
     today = df.tail(1)
     calc1 = int(today["open"])
@@ -116,7 +117,7 @@ def my_form_post():
     img = io.BytesIO()
     plt.figure(figsize=(10,3))
 
-    # annotation
+    # I annotate the graph with an arrow and statement of max and min value
     plt.annotate('Max Value on %s' % xmax, xy=(xpos_max, ymax),
                  xycoords='data',
                  xytext=(40, 5), textcoords='offset points',
@@ -129,6 +130,7 @@ def my_form_post():
                  arrowprops=dict(arrowstyle="->"),
                  horizontalalignment='left', verticalalignment='bottom')
 
+    # I return the plot and add my x and y labels and title
     sns.lineplot(x='time', y='return', data=return_plot)
     plt.title("Return of Your Investment Over Time")
     plt.xlabel("Time of Investment")
@@ -152,15 +154,16 @@ def page_not_found(e):
 
 @app.errorhandler(500)
 def internal_error(e):
-    # note that we set the 404 status explicitly
+    # If we get a 500 error, I am returning the same generic error message as the 400 error
     return render_template('404.html'), 500
 
-#Issues: currently getting the following error when making a second call. Appears to be rooted in matplotlib
-#RuntimeError: main thread is not in main loop
-#Tcl_AsyncDelete: async handler deleted by the wrong thread
+# Issue:
+# When running this locally on windows, an error will prevent a second call.
+# This error is specifc to windows and does not appear when hosted on linux
+# On aws linux instance the error does not appear
 
 
 
-
+# Set port, host, and debug status for the flask app
 if __name__ == "__main__":
-    app.run(debug=False, port=8004, host='0.0.0.0')
+    app.run(debug=False, port=8004)
