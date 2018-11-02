@@ -36,8 +36,6 @@ def my_form_post():
 
     # Here I compare these inputs agianst historical data
     # I need to convert timeline to datetime to unix
-    date_str = timeline
-    format_str = "%Y-%m-%d"
     unixtime = calendar.timegm(time.strptime(timeline, "%Y-%m-%d"))
 
     # I need to  call the api to get previous and current values
@@ -60,8 +58,6 @@ def my_form_post():
 
     #Here I create the plot
     # I need to convert timeline to datetime to unix
-    date_str = timeline
-    format_str = "%Y-%m-%d"
     unixtime = calendar.timegm(time.strptime(timeline, "%Y-%m-%d"))
 
     # I need to call the api to get previous and current values
@@ -141,7 +137,6 @@ def my_form_post():
     plt.clf()
     plt.cla()
     plt.close('all')
-
 
     #Here I combine the inputs with the comparision calculations to respond to the user
     return render_template('return_page.html', what=coin, much=investment, when=timeline, moola=investmentToday, graph_url=graph_url)
