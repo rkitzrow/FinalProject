@@ -130,17 +130,19 @@ def my_form_post():
     plt.figure(figsize=(10,3))
 
     # I annotate the graph with an arrow and statement of max and min value
-    plt.annotate('Max Value on %s' % xmax, xy=(xpos_max, ymax),
+    plt.annotate('Max Value on\n%s' % xmax, xy=(xpos_max, ymax),
                  xycoords='data',
                  xytext=(40, 5), textcoords='offset points',
                  arrowprops=dict(arrowstyle="->"),
-                 horizontalalignment='left', verticalalignment='top')
+                 horizontalalignment='left', verticalalignment='top',
+                 fontsize=10, fontweight="bold", color='r')
 
-    plt.annotate('Min Value on %s' % xmin, xy=(xpos_min, ymin),
+    plt.annotate('Min Value on\n%s' % xmin, xy=(xpos_min, ymin),
                  xycoords='data',
                  xytext=(30, 60), textcoords='offset points',
                  arrowprops=dict(arrowstyle="->"),
-                 horizontalalignment='left', verticalalignment='bottom')
+                 horizontalalignment='left', verticalalignment='bottom',
+                 fontsize=10, fontweight="bold", color='r')
 
     # I return the plot and add my x and y labels and title
     sns.lineplot(x='time', y='return', data=return_plot)
