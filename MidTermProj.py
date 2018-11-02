@@ -4,6 +4,8 @@
 #I import all the packages and libraries needed for this app
 from flask import Flask, render_template, request
 import time
+import datetime
+from datetime import datetime
 import calendar
 import requests
 from money import Money
@@ -33,6 +35,15 @@ def my_form_post():
     coin = request.form.get('selectCoin')
     investment = request.form.get('investValue')
     timeline = request.form.get('investDate')
+
+    #Now I need to change date format
+    timeline2 = datetime.strptime(timeline, "%Y-%m-%d").strftime("%m/%d/%Y")
+
+    #Here I need to change investment format
+    investment2 = int(investment)
+    investment2 = str(round(investment2, 2))
+    investment2 = Money(investment2, 'USD')
+    investment2.format('en_US')
 
     # Here I compare these inputs agianst historical data
     # I need to convert timeline to datetime to unix
@@ -93,6 +104,8 @@ def my_form_post():
     # convert unix date back to standard date
     df_return['time'] = pd.to_datetime(df_return['time'], unit='s')
 
+    # separate out the parts of the date
+    #df_return['time'] = df_return['time'].dt.year
 
     # select only columns for graph
     return_plot = pd.DataFrame(df_return, columns=["time", "return"])
@@ -102,12 +115,15 @@ def my_form_post():
     ymax = return_plot['return'].loc[ymax_index]
     xpos_max = return_plot['time'].loc[ymax_index]
     xmax = return_plot['time'].loc[ymax_index]
+    xmax = datetime.strftime(xmax, "%m/%d/%Y")
+
 
     # min return value for annotation
     ymin_index = int((np.argmin(return_plot['return'])))
     ymin = return_plot['return'].loc[ymin_index]
     xpos_min = return_plot['time'].loc[ymin_index]
     xmin = return_plot['time'].loc[ymin_index]
+    xmin = datetime.strftime(xmin, "%m/%d/%Y")
 
     # plot graph using seaborn
     img = io.BytesIO()
@@ -139,7 +155,7 @@ def my_form_post():
     plt.close('all')
 
     #Here I combine the inputs with the comparision calculations to respond to the user
-    return render_template('return_page.html', what=coin, much=investment, when=timeline, moola=investmentToday, graph_url=graph_url)
+    return render_template('return_page.html', what=coin, much=investment2, when=timeline2, moola=investmentToday, graph_url=graph_url)
 
 #I created 404 and 500 errors (although using the same html message)
 @app.errorhandler(404)
@@ -155,7 +171,7 @@ def internal_error(e):
 # Issue:
 # When running this locally on windows, an error will prevent a second call.
 # This error is specifc to windows and does not appear when hosted on linux
-# On aws linux instance the error does not appear
+# On aws linux instance the error does not appear and unlimited calls can be made
 
 
 
