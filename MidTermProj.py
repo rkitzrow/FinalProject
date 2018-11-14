@@ -27,11 +27,15 @@ app = Flask(__name__)
 #Here I am setting up the template for the data entry page
 @app.route('/')
 def my_form():
+    # Look in the templates folder for this html page which includes the input fields
     return render_template('three_button_form.html')
 
 #Here I am defining the operations of the app and what the app will return. Is accepts post only right now
 @app.route('/', methods=['POST'])
 def my_form_post():
+
+    # Here I create variables that align to form inputs from the three_button_form.html page
+    # I can then refer to these variables for return calculations and for use in the API
     coin = request.form.get('selectCoin')
     investment = request.form.get('investValue')
     timeline = request.form.get('investDate')
@@ -40,27 +44,47 @@ def my_form_post():
     timeline2 = datetime.strptime(timeline, "%Y-%m-%d").strftime("%m/%d/%Y")
 
     #Here I need to change investment format
+
+    # I set the investmetn to an integer
     investment2 = int(investment)
+
+    # I then convert the integer to a string with two decimals
     investment2 = str(round(investment2, 2))
+
+    # I turn the investmetn into USD money format in english
     investment2 = Money(investment2, 'USD')
     investment2.format('en_US')
 
-    # Here I compare these inputs agianst historical data
+    # Here I compare these inputs against historical data
     # I need to convert timeline to datetime to unix
     unixtime = calendar.timegm(time.strptime(timeline, "%Y-%m-%d"))
 
     # I need to  call the api to get previous and current values
+    # As noted above, I use the dynamic variable of coin for the GET API call
+    # I hardcode the currency to USE and return the max possible entries
     d = requests.get(
         "https://min-api.cryptocompare.com/data/histoday?fsym=" + coin + "&tsym=USD&limit=1000000000").json()
+
+    #I pull the data from the dictinary
     df = pd.DataFrame.from_dict(d['Data'])
+
+    #I don't want all the fields and select only time, close, and open values to make my return calculations
     df = df[['time', 'close', 'open']]
 
-    # I need to calc % change (current-original/original) then investment + (investment * % change) = investmentToday
+    #I need to calc % change (current-original/original) then investment + (investment * % change) = investmentToday
+
+    # I select the origin date and identify it as unixtime
     orig = df.loc[df['time'] == unixtime]
+
+    # I identify today's date which is the last date in the tale
     today = df.tail(1)
+
+    #I make interim calculations for computing return (close-open)/open
     calc1 = int(today["open"])
     calc2 = int(orig["open"])
     pct = ((calc1 - calc2) / calc2)
+
+    # I calculate the return and set to money format to USD and and language to english
     investmentToday = int(investment) + ((int(investment)) * pct)
     investmentToday = str(round(investmentToday, 2))
     investmentToday = Money(investmentToday, 'USD')
@@ -126,6 +150,7 @@ def my_form_post():
     xmin = datetime.strftime(xmin, "%m/%d/%Y")
 
     # plot graph using seaborn
+    # this is required so we can return the image on the return_page.html
     img = io.BytesIO()
     plt.figure(figsize=(10,3))
 

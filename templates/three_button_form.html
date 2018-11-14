@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <body>
+<!--This is the name of the page-->
 <h2>Cryptocurrency Investment Calculator</h2>
+<!--This is the form instruction-->
 <p>Pick a cryptocurrency, an investment value, and an investment date to learn what that investment would be worth today</p>
+<!--This is the start of the form which will collect coin, investment, and date info-->
 <form method="post">
-<!--removed action="process.php"-->
+<!--This form will supply data via POST to the MidTermProj.py file. The data will be used to dynamically call the API-->
+<!--coin is selected here-->
   Pick Your Coin:
   <select name="selectCoin">
     <option value="BTC">BTC</option>
@@ -13,24 +17,25 @@
   </select>
 <br>
 <br>
-<!--insert missing code below this line-->
+<!--investment value is selected here-->
   Pick Your Investment (in USD):
   <input type="number" name="investValue" min="1" max="1000000000000000" />
 <br>
 <br>
+<!--Investmetn date is selected here-->
   Pick Your Investment Date:
   <input type="date" name="investDate">
  <br>
  <br>
  <br>
 
-<!--insert missing code above  this line-->
-
+<!--The form is submitted with this button-->
   <input type="submit" value="Click Here to be Depressed!"/>
 </form>
 <br>
 <br>
 <strong>Note:</strong>
+<!--These notes are here for the user to prevent calculation errors-->
 <br>
 When selecting BTC the earliest possible investment date is 4/7/2013
 <br>
