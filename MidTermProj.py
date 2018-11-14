@@ -63,7 +63,7 @@ def my_form_post():
     # As noted above, I use the dynamic variable of coin for the GET API call
     # I hardcode the currency to USE and return the max possible entries
     d = requests.get(
-        "https://min-api.cryptocompare.com/data/histoday?fsym=" + coin + "&tsym=USD&limit=1000000000").json()
+        "https://min-api.cryptocompare.com/data/histoday?fsym=" + coin + "&tsym=USD&limit=2000").json()
 
     #I pull the data from the dictinary
     df = pd.DataFrame.from_dict(d['Data'])
@@ -97,7 +97,7 @@ def my_form_post():
 
     # I need to call the api to get previous and current values
     d = requests.get(
-        "https://min-api.cryptocompare.com/data/histoday?fsym=" + coin + "&tsym=USD&limit=1000000000").json()
+        "https://min-api.cryptocompare.com/data/histoday?fsym=" + coin + "&tsym=USD&limit=2000").json()
     df = pd.DataFrame.from_dict(d['Data'])
     df = df[['time', 'close', 'open']]
 
