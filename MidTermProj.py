@@ -1,7 +1,7 @@
 #This flask asks users to select a coin, investment value, and investment date and will return the current worth
 #This flask will also return a plot of the coin returns from the initial investment date to today
 
-#I import all the packages and libraries needed for this app
+#I import all the packages and libraries needed for this app.
 from flask import Flask, render_template, request
 import time
 import datetime
