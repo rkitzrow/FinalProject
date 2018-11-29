@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<!--I set the styles here for the text and buttons-->
+<style type="text/css">
+#center { display: flex; justify-content: center; }
+.text_center { text-align: center; }
+.button_space { margin-right: 15px; }
+.box { width:500px; border:3px; border-style:solid; border-color:black; padding: 1em; justify-content:center; display:flex;}
+</style>
+
+<!--The header of the page and instructions are listed-->
+<body>
+<!--This is the name of the page-->
+<h2>Cryptocurrency Investment Adviser</h2>
+<p><i>A cryptocurrency investment tool created by Ryne Kitzrow and Max (Gang Ping) Zhu as part of FE-595</i></p>
+<br><br>
+
+<!--This is the start of the form which will collect coin, investment, and date info-->
+<div class="text_center">
+    <p><h3>How are you invested in Crypto?</h3></p>
+</div>
+   <form id="entry_form" method="POST" action="http://127.0.0.1:8020/form.html">
+<!--This form will supply data via POST to the FinalProj.py file. The data will be used to dynamically call the API-->
+        <div id="center">
+                <input type="button" name="investor" value="    I am an investor    " class="button_space">
+                <input type="button" name="rookie" value="I want to be an investor" class="button_space">
+        </div>
+   </form>
+</body>
+</html>
