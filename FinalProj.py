@@ -25,23 +25,20 @@ app = Flask(__name__)
 
 
 #Here I create an entry page that allows the user to identify their investment level
-#@app.route('/')
-#def my_start():
+@app.route('/')
+def my_start():
     # Look in the templates folder for this html page which includes the input fields
-    #return render_template('start_page.html')
+    return render_template('start_page.html')
 
 #Here I am setting up the template for the data entry page
-@app.route('/')
+@app.route('/CurrentInvestor', methods=['POST'])
 def my_form():
     # Look in the templates folder for this html page which includes the input fields
     return render_template('three_button_form.html')
 
 #Here I am defining the operations of the app and what the app will return. Is accepts post only right now
-@app.route('/', methods=['POST'])
+@app.route('/results', methods=['POST'])
 def my_form_post():
-
-
-
     # Here I create variables that align to form inputs from the three_button_form.html page
     # I can then refer to these variables for return calculations and for use in the API
     coin = request.form.get('selectCoin')

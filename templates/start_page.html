@@ -20,12 +20,21 @@
 <div class="text_center">
     <p><h3>How are you invested in Crypto?</h3></p>
 </div>
-   <form id="entry_form" method="POST" action="http://127.0.0.1:8020/form.html">
-<!--This form will supply data via POST to the FinalProj.py file. The data will be used to dynamically call the API-->
+
+
+    <form id="entry_form" action="/CurrentInvestor" method="POST">
         <div id="center">
-                <input type="button" name="investor" value="    I am an investor    " class="button_space">
-                <input type="button" name="rookie" value="I want to be an investor" class="button_space">
+             <input type="submit" name="investor" value="Click to Tell Me"/>
+        </div>
+    </form>
+<!--commenting out this form until I can figure out how to redirect to multiple urls
+    <form id="entry_form" method="POST" >
+        <div id="center">
+                <input type="button" name="investor" value="I am an investor" class="button_space" >
+                <input type="button" name="investor" value="I want to be an investor" class="button_space">
         </div>
    </form>
+-->
+
 </body>
 </html>
