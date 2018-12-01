@@ -2,13 +2,24 @@
 
 {% block content %}
 <!--This is the header of the page-->
-<h2>I reverted the code and it is working... The results are:</h2>
+<h2>Step 2. See how your investment has done so far</h2>
 <!--This is the dynamic text which tells a user how their investment has performed based on their input-->
 <p>If you invested {{ much }} in {{ what }} on {{ when }} that would now be worth {{ moola }}</p>
 <!--This is the image of the return graph being included-->
 <img src="data:image/png;base64, {{ graph_url }}">
+<br>
+<div>
+    <h2>Step 3. Get a recommendation to sell or hold</h2>
+    <p>Click the link below to fill out a risk profile which will determine if you should hold or sell your investment</p>
+        <form method="POST" >
+            <div>
+                    <input type="submit" name="recommendation" value="Get My Investment Recommendation"
+                           class="button_space" formaction="/FutureInvestor">
+            </div>
+        </form>
+</div>
 <br><br><br><br>
 <footer>
-    <i>Created by Ryne Kitzrow and Max (Gang Ping) Zhu as part of FE-595. Last updated in November 2018.</i>
+    <i>Created by Ryne Kitzrow and Max (Gang Ping) Zhu as part of FE-595. Last updated in December 2018.</i>
 </footer>
 { % endblock %}

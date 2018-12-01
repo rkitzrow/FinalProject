@@ -25,13 +25,19 @@ app = Flask(__name__)
 
 
 #Here I create an entry page that allows the user to identify their investment level
-@app.route('/')
+@app.route('/Home')
 def my_start():
     # Look in the templates folder for this html page which includes the input fields
     return render_template('start_page.html')
 
-#Here I am setting up the template for the data entry page
-@app.route('/CurrentInvestor', methods=['POST'])
+#Landing page for a future investor
+@app.route('/FutureInvestor', methods=['POST' , 'GET'])
+def my_evaluation():
+    # Look in the templates folder for this html page which includes the input fields
+    return render_template('placeholder_page.html')
+
+#Landing page for a current investor
+@app.route('/CurrentInvestor', methods=['POST' , 'GET'])
 def my_form():
     # Look in the templates folder for this html page which includes the input fields
     return render_template('three_button_form.html')
@@ -188,6 +194,12 @@ def my_form_post():
 
     #Here I combine the inputs with the comparision calculations to respond to the user
     return render_template('return_page.html', what=coin, much=investment2, when=timeline2, moola=investmentToday, graph_url=graph_url)
+
+#Help and FAQ page
+@app.route('/Help', methods=['GET'])
+def my_help():
+    # Look in the templates folder
+    return render_template('help.html')
 
 #I created 404 and 500 errors (although using the same html message)
 @app.errorhandler(404)

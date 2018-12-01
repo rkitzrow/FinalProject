@@ -3,14 +3,58 @@
 
 <!--I set the styles here for the text and buttons-->
 <style type="text/css">
-#center { display: flex; justify-content: center; }
-.text_center { text-align: center; }
-.button_space { margin-right: 15px; }
-.box { width:500px; border:3px; border-style:solid; border-color:black; padding: 1em; justify-content:center; display:flex;}
+#center {
+    display: flex; justify-content: center;
+}
+.text_center {
+    text-align: center;
+}
+.button_space {
+    margin-right: 15px;
+}
+.box {
+    width:500px; border:3px; border-style:solid; border-color:black; padding: 1em; justify-content:center; display:flex;
+}
+
+/* Background Color */
+.navbar {
+    background-color: #8C8887;
+    overflow: hidden;
+}
+
+/* Format links inside the bar */
+.navbar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 8px 8px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Hover Format of Links */
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Color of Active Link */
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
 </style>
 
 <!--The header of the page and instructions are listed-->
 <body>
+<!-- Navigation Bar -->
+<div class="navbar">
+  <a href="Home">Home</a>
+  <a href="CurrentInvestor">Current Investors</a>
+  <a href="FutureInvestor">Future Investors</a>
+  <a href="Help">Help and FAQ</a>
+</div>
+
 <!--This is the name of the page-->
 <h2>Cryptocurrency Investment Adviser</h2>
 <p><i>A cryptocurrency investment tool created by Ryne Kitzrow and Max (Gang Ping) Zhu as part of FE-595</i></p>
@@ -18,23 +62,15 @@
 
 <!--This is the start of the form which will collect coin, investment, and date info-->
 <div class="text_center">
-    <p><h3>How are you invested in Crypto?</h3></p>
+    <p><h3>Are you invested in Crypto?</h3></p>
 </div>
 
-
-    <form id="entry_form" action="/CurrentInvestor" method="POST">
-        <div id="center">
-             <input type="submit" name="investor" value="Click to Tell Me"/>
-        </div>
-    </form>
-<!--commenting out this form until I can figure out how to redirect to multiple urls
+<!-- This form re-directs current investors and future investors to different pages -->
     <form id="entry_form" method="POST" >
         <div id="center">
-                <input type="button" name="investor" value="I am an investor" class="button_space" >
-                <input type="button" name="investor" value="I want to be an investor" class="button_space">
+                <input type="submit" name="investor" value="Current Investor" class="button_space" formaction="/CurrentInvestor">
+                <input type="submit" name="investor" value="Future Investor" class="button_space" formaction="/FutureInvestor">
         </div>
    </form>
--->
-
 </body>
 </html>

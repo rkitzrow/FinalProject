@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+/* Background Color */
+.navbar {
+    background-color: #8C8887;
+    overflow: hidden;
+}
+
+/* Format links inside the bar */
+.navbar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 8px 8px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Hover Format of Links */
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Color of Active Link */
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+
+<body>
+<!-- Navigation Bar -->
+<div class="navbar">
+  <a href="Home">Home</a>
+  <a href="CurrentInvestor">Current Investors</a>
+  <a href="FutureInvestor">Future Investors</a>
+  <a href="Help">Help and FAQ</a>
+</div>
+
+<!--This is the header of the error page-->
+<h2>Help and FAQ</h2>
+<!--This is the primary text of the error page which tells the user what to try next-->
+<p>If you are having trouble using this application, or would like to learn more about cryptocurrencies,
+    please read the information below:</p>
+<ol type="I">
+    <li>
+        <div>
+            <h4>What are cryptocurrencies</h4>
+                <p>
+                    Cryptocurrencies are decentralized virtual money units that are recorded on data files called blockchains.
+                Cryptocurrencies are decentralized in that they have no single controlling entity, such as a government
+                or company. Rather, cryptocurrencies represent unique keys that have their entire transaction history
+                stored on decentralized blocks. These blocks, which together make up the blockchain, are stored by no
+                single user and record all previous and subsequent transaction histories (Berentsen and Schär 2018).
+                Additional virtual money units can be created in an act known as “mining” by solving algorithms that add
+                new blocks to the blockchain. While there is no limit to the number of blocks that can be added to the
+                blockchain, some currencies, including bitcoin, have limits to the number of coins that are earned in the
+                mining process (Berentsen and Schär 2018).</p>
+
+                <p>
+                    The first cryptocurrency, Bitcoin, was proposed in a 2008 white paper, written under the pseudonym
+                “Satoshi Nakamoto,” called  “Bitcoin – A Peer to Peer Electronic Cash System”. The software behind
+                Bitcoin was made public in 2009 and it began trading in 2010. Bitcoin was followed by hundreds, if not
+                thousands, of other cryptocurrencies, some of which were also designed specifically to be monetary units
+                and others that inadvertently became monetary units (Marr 2017). At the time of this paper, Bitcoin has
+                the highest market cap of any cryptocurrency, at 158.4 billion USD
+                (Cryptocurrency Market Capitalizations n.d.). Ethereum, an originally non-monetary coin created in 2015
+                (Hertig n.d.), is second at 67.5 billion USD (Cryptocurrency Market Capitalizations n.d.). Litecoin,
+                created in 2011 as one of the first successors to Bitcoin (Marr 2017), is seventh in market cap at 8.5
+                billion USD (Cryptocurrency Market Capitalizations n.d.)</p>
+        </div>
+    </li>
+   <li>
+       <div>
+            <h4>How are cryptocurrencies traded?</h4>
+                <p>
+                        Cryptocurrencies are generally traded on exchanges, of which dozens exist world wide, that allow
+                    users to sell and buy coins for issued currencies, like USD or EUR, or exchange them for other
+                    cryptocurrencies. Prices on these exchanges are determined by the aggregated rates at which sellers
+                    and buyers reach agreements and complete transactions (Berentsen and Schär 2018). Sellers list coins
+                    for given prices and transition ownership to buyers when buyers agree to buy for a price more or
+                    equal to the listed sale price. The list price of cryptocurrencies on a given exchange is the average
+                    of recent sale prices on that exchange. Similarly, the aggregated list price of cryptocurrencies
+                    across exchanges is calculated by volume weighted average price between exchanges (Madeira 2018).</p>
+                <p>
+                        Because aggregated coin prices require weighted volumes for all exchanges, and because there is no
+                    single government or corporate entity to determine the exchanges that should be included in the
+                    aggregated price, final prices can be considered subjective since aggregators can choose to include
+                    or not include particular exchanges as they see fit. Cryptocompare.com, the price source used for
+                    this study, acknowledges that it excludes some exchanges due to, but not limited to, small volumes
+                    and trading irregularities (Madeira 2018).
+                </p>
+       </div>
+   </li>
+   <li>
+       <div>
+           <h4>How does this application help me?</h4>
+           <p>This application aims to help both current cryptocurrency investors and future crytocurrency investors</p>
+           <dl>
+               <dt><b>Current Investors</b></dt>
+                    <dd>- Understand how your current investments are doing</dd>
+                    <dd>- Use our proprietary algorithms to determine if you should hold or sell your investment</dd>
+               <br>
+               <dt><b>Future Investors</b></dt>
+                    <dd>- Use our proprietary algorithms to determine if you should buy into a currency right now</dd>
+           </dl>
+       </div>
+   </li>
+   <li>
+       <div>
+           <h4>I'm a current investor -- How should I use this application?</h4>
+           <p><b>Steps for a current investor</b></p>
+           <ol type ="1">
+               <li><a href="/Home">Go to the homepage</a></li>
+               <li>Click the button for "Current Investor"</li>
+               <li>Fill in data about your current investment and click "Submit" (separate coins and investment dates must
+                   be tracked separately</li>
+               <li>See your results</li>
+               <li>On the results page, click the "Get My Investment Recommendation" button</li>
+               <li>Fill out your risk profile and click the "Get My Investment Recommendation" button</li>
+           </ol>
+       </div>
+   </li>
+   <li>
+       <div>
+           <h4>I'm a future investor -- How should I use this application?</h4>
+           <p><b>Steps for a future investor</b></p>
+           <ol type ="1">
+               <li><a href="/Home">Go to the homepage</a></li>
+               <li>Click the button for "Future Investor"</li>
+               <li>Fill out your risk profile and click the "Get My Investment Recommendation" button</li>
+           </ol>
+       </div>
+   </li>
+   <li>
+       <div>
+           <h4>Sources</h4>
+           <ul style="list-style-type:none">
+               <li>Berentsen, Aleksander, and Fabian Schär. 2018. "A Short Introduction to the World of Cryptocurrencies."
+                   Federal Reserve Bank of St. Louis Review 100 (1): 1-16.</li>
+               <br>
+               <li>n.d. Cryptocurrency Market Capitalizations. Accessed April 28, 2018.
+                   https://coinmarketcap.com/all/views/all/.</li>
+               <br>
+               <li>Madeira, Antonio. 2018. How does our Cryptocurrency Index Work. April 5. Accessed April 15, 2018.
+                   https://www.cryptocompare.com/coins/guides/how-does-our-cryptocurrecy-index-work/.</li>
+               <br>
+               <li>Marr, Benard. 2017. "A Short History Of Bitcoin And Crypto Currency Everyone Should Read." Forbes,
+                   December 6. Accessed April 15, 2018.
+                   https://www.forbes.com/sites/bernardmarr/2017/12/06/a-short-history-of-bitcoin-and-crypto-currency-
+                   everyone-should-read/#1742a0783f27.</li>
+           </ol>
+       </div>
+   </li>
+</ol>
+</body>
+</html>
