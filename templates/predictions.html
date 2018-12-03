@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<body>
+<!--Displays a message about the cryptocurrency selected-->
+<h2>The calculations of prices for {{ coin }} are as follows:</h2>
+
+<!--Display the current results along with additional calculations for the selected cryptocurrency in a table format-->
+<div>{{ adjusted_results | safe}}</div>
+
+<!--Present the graph that was created-->
+<img src="data:image/png;base64,{{ result }}">
+
+<br><br>
+
+</body>
+
+{% endblock %}
