@@ -34,7 +34,7 @@ def my_start():
 @app.route('/FutureInvestor', methods=['POST' , 'GET'])
 def my_evaluation():
     # Look in the templates folder for this html page which includes the input fields
-    return render_template('placeholder_page.html')
+    return render_template('futureinvestor_page.html')
 
 #Landing page for a current investor
 @app.route('/CurrentInvestor', methods=['POST' , 'GET'])

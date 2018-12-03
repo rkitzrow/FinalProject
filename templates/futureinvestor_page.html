@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!--This is the header of the error page-->
+<h2>Cryptocurrency Predictions</h2>
+
+<h2>Please select a cryptocurrency below:</h2>
+<form method="POST">
+    <input type="submit", formaction="500" style="visibility: hidden; display: none;">
+        <input type="radio" name="ChooseCoin" value="BTC" checked> BTC<br>
+        <input type="radio" name="ChooseCoin" value="XRP"> XRP<br>
+        <input type="radio" name="ChooseCoin" value="LTC"> LTC<br>
+        <input type="radio" name="ChooseCoin" value="ETH"> ETH
+<br><br>
+
+    <div id="center">
+        <button formaction="/latestprice">Show me the latest prices</button>
+        <button formaction="/predictions">Show me the predictions</button>
+    </div>
+
+    <div>
+        <p>Please note that predictions can take a long time to load.</p>
+    </div>
+</form>
+
+<br><br>
+
+{% endblock %}
