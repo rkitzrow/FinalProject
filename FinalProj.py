@@ -25,7 +25,7 @@ app = Flask(__name__)
 
 
 #Here I create an entry page that allows the user to identify their investment level
-@app.route('/Home')
+@app.route('/')
 def my_start():
     # Look in the templates folder for this html page which includes the input fields
     return render_template('start_page.html')
