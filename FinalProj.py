@@ -212,8 +212,8 @@ def my_form_post():
     today = df.tail(1)
 
     #I make interim calculations for computing return (close-open)/open
-    calc1 = int(today["open"])
-    calc2 = int(orig["open"])
+    calc1 = float(today["open"])
+    calc2 = float(orig["open"])
     pct = ((calc1 - calc2) / calc2)
 
     # I calculate the return and set to money format to USD and and language to english
@@ -236,8 +236,8 @@ def my_form_post():
     # I need to calc % change (current-original/original) then investment + (investment * % change) = investmentToday
     orig = df.loc[df['time'] == unixtime]
     today = df.tail(1)
-    calc1 = int(today["open"])
-    calc2 = int(orig["open"])
+    calc1 = float(today["open"])
+    calc2 = float(orig["open"])
     pct = ((calc1 - calc2) / calc2)
     investmentToday = int(investment) + ((int(investment)) * pct)
     investmentToday = str(round(investmentToday, 2))
