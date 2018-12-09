@@ -5,7 +5,7 @@
 from flask import Flask, render_template, request, url_for, redirect
 import time
 import datetime
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import calendar
 import requests
 from money import Money
@@ -124,24 +124,24 @@ def crypto_predict():
 
     # Creating the Prediction for BTC
     df_month2 = df_month[['High']]
-    date_list = [datetime(2018, 6, 30),
-                 datetime(2018, 7, 31),
-                 datetime(2018, 8, 31),
-                 datetime(2018, 9, 30),
-                 datetime(2018, 10, 31),
-                 datetime(2018, 11, 30),
-                 datetime(2018, 12, 31),
-                 datetime(2019, 1, 31),
-                 datetime(2019, 2, 28),
-                 datetime(2019, 3, 31),
-                 datetime(2019, 4, 30),
-                 datetime(2019, 5, 31),
-                 datetime(2019, 6, 30),
-                 datetime(2019, 7, 31)]
+
+    #Create a range of dates from 1 year prior to today to 1 year in the future
+    date = pd.date_range(pd.datetime.today() + timedelta(-365), periods=730).date
+
+    #Select only the last date of each month
+    last_dates = [datetime(date.year, date.month,
+                           calendar.monthrange(date.year, date.month)[1]) for date in date]
+
+    #Create a list of unique last month dates
+    date_list = list(set(last_dates))
 
     future = pd.DataFrame(index=date_list, columns=df_month.columns)
     df_month2 = pd.concat([df_month2, future])
     df_month2['forecast'] = invboxcox(best_model.predict(start=0, end=75), pred_input)
+
+    #selects the last 36 df months for the graph
+    df_month2 = df_month2.tail(36)
+
     plt.figure(figsize=(15, 7))
     df_month2.High.plot()
     df_month2.forecast.plot(color='r', ls='--', label='predicted high')
