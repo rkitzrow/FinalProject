@@ -141,13 +141,18 @@ def crypto_predict():
 
     #selects the last 36 df months for the graph
     df_month2 = df_month2.tail(36)
+    df_High = df.tail(365)
 
     plt.figure(figsize=(15, 7))
-    df_month2.High.plot()
-    df_month2.forecast.plot(color='r', ls='--', label='predicted high')
+
+    # Plot the prediction of the High price
+    df_month2.forecast.plot(color='g', ls='--', label='Predicted High')
+
+    # Plot the actual price of the High of the cryptocurrency
+    df_High.High.plot()
     plt.legend()
-    plt.title('Cryptocurrency Prediction, by months')
-    plt.ylabel('mean USD')
+    plt.title('Cryptocurrency Prediction')
+    plt.ylabel('USD')
 
     figfile = BytesIO()
     plt.savefig(figfile, format='png')
@@ -342,4 +347,4 @@ def internal_error(e):
 
 # Set port, host, and debug status for the flask app
 if __name__ == "__main__":
-    app.run(debug=False, port=8020)
+    app.run(debug=True, port=8020)

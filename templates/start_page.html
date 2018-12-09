@@ -1,65 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<!--I set the styles here for the text and buttons-->
-<style type="text/css">
-#center {
-    display: flex; justify-content: center;
-}
-.text_center {
-    text-align: center;
-}
-.button_space {
-    margin-right: 15px;
-}
-.box {
-    width:500px; border:3px; border-style:solid; border-color:black; padding: 1em; justify-content:center; display:flex;
-}
-
-/* Background Color */
-.navbar {
-    background-color: #8C8887;
-    overflow: hidden;
-}
-
-/* Format links inside the bar */
-.navbar a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 8px 8px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-/* Hover Format of Links */
-.navbar a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-/* Color of Active Link */
-.navbar a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-</style>
-
-<!--The header of the page and instructions are listed-->
-<body>
-<!-- Navigation Bar -->
-<div class="navbar">
-  <a href="Home">Home</a>
-  <a href="CurrentInvestor">Current Investors</a>
-  <a href="FutureInvestor">Future Investors</a>
-  <a href="Help">Help and FAQ</a>
-</div>
+{% block content %}
 
 <!--This is the name of the page-->
 <h2>Cryptocurrency Investment Adviser</h2>
-<p><i>A cryptocurrency investment tool created by Ryne Kitzrow and Max (Gang Ping) Zhu as part of FE-595</i></p>
-<br><br>
-
+<p>Welcome to the cryptocurrency investment adviser tool. Please make selection below related to your investment cryptocurrency interests.</p>
 <!--This is the start of the form which will collect coin, investment, and date info-->
 <div class="text_center">
     <p><h3>Are you invested in Crypto?</h3></p>
@@ -72,5 +17,5 @@
                 <input type="submit" name="investor" value="Future Investor" class="button_space" formaction="/FutureInvestor">
         </div>
    </form>
-</body>
-</html>
+
+{% endblock %}
