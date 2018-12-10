@@ -28,6 +28,19 @@
     background-color: #4CAF50;
     color: white;
 }
+
+#center {
+    display: flex; justify-content: center;
+}
+.text_center {
+    text-align: center;
+}
+.button_space {
+    margin-right: 15px;
+}
+.box {
+    width:500px; border:3px; border-style:solid; border-color:black; padding: 1em; justify-content:center; display:flex;
+}
 </style>
 <body>
 <!-- Navigation Bar -->
@@ -40,4 +53,8 @@
         <hr>
         {% block content %}{% endblock %}
 </body>
+<br>
+<footer>
+    <i>A cryptocurrency investment tool created by Ryne Kitzrow and Max (Gang Ping) Zhu as part of FE-595. Last updated in December 2018.</i>
+</footer>
 </html>
