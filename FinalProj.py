@@ -75,6 +75,14 @@ def crypto_predict():
     # Creating a variable to display the adjusted results
     df_display = df.head(5)
 
+    # Setting up calculation on whether the user should divest
+    predictdate = request.form.get('predictDate')
+    predictdate = pd.to_datetime(predictdate)
+    investhigh = df.loc[df['Date'] == predictdate, 'High'].iloc[0]
+
+    divestdate = request.form.get('divestDate')
+    divestdate = pd.to_datetime(divestdate)
+
     # Aligning the date to the index in the dataframe
     df.index = df.Date
     df = df.resample('D').mean()  # Resampling to daily frequency for the cryptocurrency
@@ -159,8 +167,19 @@ def crypto_predict():
     figfile.seek(0)
     figdata_png = base64.b64encode(figfile.getvalue())
 
+    # Prediction date
+    # date_future = pd.DataFrame(index=list(set(date)), columns=df.columns)
+    # df2 = pd.concat(df[['High']], date_future)
+    # df2['forecast'] = invboxcox(best_model.predict(start=0, end=75), pred_input)
+    # predicthigh = df2.loc[df2['Date'] == divestdate, 'forecast'].iloc[0]
+
     # The return below shows the latest results in a table format.
-    return render_template('predictions.html', coin=coin, result=figdata_png.decode('utf8'), adjusted_results=df_display.to_html())
+    return render_template('predictions.html',
+                           coin=coin,
+                           investprice=investhigh,
+                           divestdate=divestdate,
+                           result=figdata_png.decode('utf8'),
+                           adjusted_results=df_display.to_html())
 
 #Landing page for a current investor
 @app.route('/CurrentInvestor', methods=['POST' , 'GET'])
