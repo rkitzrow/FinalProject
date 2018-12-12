@@ -80,18 +80,16 @@ def crypto_predict():
     predictdate = pd.to_datetime(predictdate)
     investhigh = df.loc[df['Date'] == predictdate, 'High'].iloc[0]
 
-    divestdate = request.form.get('divestDate')
-    divestdate = pd.to_datetime(divestdate)
-
     # Aligning the date to the index in the dataframe
     df.index = df.Date
     df = df.resample('D').mean()  # Resampling to daily frequency for the cryptocurrency
     df_month = df.resample('M').mean()  # Resampling to monthly frequency for cryptocurrency
 
     # Creating the Box-Cox Transformations
+    df['high_box'], daily_pred_input = stats.boxcox(df.High)
     df_month['high_box'], pred_input = stats.boxcox(df_month.High)
 
-    # Initial approximation of parameters
+    # Creating the initial approximation of parameters
     Qs = range(0, 2)
     qs = range(0, 3)
     Ps = range(0, 3)
@@ -102,15 +100,15 @@ def crypto_predict():
     parameters_list = list(parameters)
     len(parameters_list)
 
-    # Model Selection for BTC
+    # Model Selection for cryptocurrency for monthly prediction
     results = []
     best_aic = float("inf")
     for param in parameters_list:
         try:
-            model = sm.tsa.statespace.SARIMAX(df_month.high_box, order=(param[0], d, param[1]),
+            model = sm.tsa.statespace.SARIMAX(df_month.high_box,
+                                              order=(param[0], d, param[1]),
                                               seasonal_order=(param[2], D, param[3], 12)).fit(disp=-1)
         except ValueError:
-            print('wrong parameters:', param)
             continue
         aic = model.aic
         if aic < best_aic:
@@ -119,10 +117,6 @@ def crypto_predict():
             best_param = param
         results.append([param, model.aic])
 
-    # Best Models
-    result_table = pd.DataFrame(results)
-    result_table.columns = ['parameters', 'aic']
-
     # Creating a function for the Inverse Box-Cox Transformation
     def invboxcox(y, pred_input):
         if pred_input == 0:
@@ -130,15 +124,21 @@ def crypto_predict():
         else:
             return (np.exp(np.log(pred_input * y + 1) / pred_input))
 
-    # Creating the Prediction for BTC
+    # Creating the Prediction for the cryptocurrency
+    # Start by creating different dataframes to work off of
     df_month2 = df_month[['High']]
 
     #Create a range of dates from 1 year prior to today to 1 year in the future
     date = pd.date_range(pd.datetime.today() + timedelta(-365), periods=730).date
 
     #Select only the last date of each month
-    last_dates = [datetime(date.year, date.month,
+    last_dates = [datetime(date.year,
+                           date.month,
                            calendar.monthrange(date.year, date.month)[1]) for date in date]
+
+    all_dates = [datetime(date.year,
+                          date.month,
+                          date.day) for date in date]
 
     #Create a list of unique last month dates
     date_list = list(set(last_dates))
@@ -162,22 +162,32 @@ def crypto_predict():
     plt.title('Cryptocurrency Prediction')
     plt.ylabel('USD')
 
+    # Creating the graph as an image for the output
     figfile = BytesIO()
     plt.savefig(figfile, format='png')
     figfile.seek(0)
     figdata_png = base64.b64encode(figfile.getvalue())
 
-    # Prediction date
-    # date_future = pd.DataFrame(index=list(set(date)), columns=df.columns)
-    # df2 = pd.concat(df[['High']], date_future)
-    # df2['forecast'] = invboxcox(best_model.predict(start=0, end=75), pred_input)
-    # predicthigh = df2.loc[df2['Date'] == divestdate, 'forecast'].iloc[0]
+    # Divest date reformatting
+    divestdate = request.form.get('divestDate')
+    unchanged_divest_date = divestdate
+    divestdate = pd.to_datetime(divestdate)
+
+    # Creating an approximation based on month for the returned prediction
+    approx_divest_date = datetime(divestdate.year,
+                                  divestdate.month,
+                                  calendar.monthrange(divestdate.year, divestdate.month)[1])
+
+    df_month2['Date'] = df_month2.index
+    df_month2['Date'] = pd.to_datetime(df_month2['Date'])
+    predicthigh = df_month2.loc[df_month2['Date'] == approx_divest_date, 'forecast'].iloc[0]
 
     # The return below shows the latest results in a table format.
     return render_template('predictions.html',
                            coin=coin,
                            investprice=investhigh,
-                           divestdate=divestdate,
+                           divestdate=unchanged_divest_date,
+                           predicthigh=predicthigh,
                            result=figdata_png.decode('utf8'),
                            adjusted_results=df_display.to_html())
 
