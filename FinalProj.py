@@ -80,9 +80,6 @@ def crypto_predict():
     predictdate = pd.to_datetime(predictdate)
     investhigh = df.loc[df['Date'] == predictdate, 'High'].iloc[0]
 
-    divestdate = request.form.get('divestDate')
-    divestdate = pd.to_datetime(divestdate)
-
     # Aligning the date to the index in the dataframe
     df.index = df.Date
     df = df.resample('D').mean()  # Resampling to daily frequency for the cryptocurrency
@@ -102,7 +99,7 @@ def crypto_predict():
     parameters_list = list(parameters)
     len(parameters_list)
 
-    # Model Selection for BTC
+    # Model Selection for cryptocurrency
     results = []
     best_aic = float("inf")
     for param in parameters_list:
@@ -130,18 +127,26 @@ def crypto_predict():
         else:
             return (np.exp(np.log(pred_input * y + 1) / pred_input))
 
-    # Creating the Prediction for BTC
+    # Creating the Prediction for the cryptocurrency
+    # Start by creating different dataframes to work off of
     df_month2 = df_month[['High']]
+    df_2 = df[['High']]
 
     #Create a range of dates from 1 year prior to today to 1 year in the future
     date = pd.date_range(pd.datetime.today() + timedelta(-365), periods=730).date
 
     #Select only the last date of each month
-    last_dates = [datetime(date.year, date.month,
+    last_dates = [datetime(date.year,
+                           date.month,
                            calendar.monthrange(date.year, date.month)[1]) for date in date]
+
+    all_dates = [datetime(date.year,
+                          date.month,
+                          date.day) for date in date]
 
     #Create a list of unique last month dates
     date_list = list(set(last_dates))
+    all_date_list = list(set(all_dates))
 
     future = pd.DataFrame(index=date_list, columns=df_month.columns)
     df_month2 = pd.concat([df_month2, future])
@@ -167,16 +172,23 @@ def crypto_predict():
     figfile.seek(0)
     figdata_png = base64.b64encode(figfile.getvalue())
 
-    # Prediction date
-    # date_future = pd.DataFrame(index=list(set(date)), columns=df.columns)
-    # df2 = pd.concat(df[['High']], date_future)
-    # df2['forecast'] = invboxcox(best_model.predict(start=0, end=75), pred_input)
-    # predicthigh = df2.loc[df2['Date'] == divestdate, 'forecast'].iloc[0]
+    # Divest date reformatting
+    divestdate = request.form.get('divestDate')
+    divestdate = pd.to_datetime(divestdate)
+
+    # Prediction date calculations
+    date_future = pd.DataFrame(index=all_date_list, columns=df.columns)
+    df_2 = pd.concat([df_2, date_future])
+    df_2['Date'] = df_2.index
+    df_2['Date'] = pd.to_datetime(df_2['Date'])
+    df_2['forecast'] = invboxcox(best_model.predict(start=0, end=75), pred_input)
+    predicthigh = df_2.loc[df_2['Date'] == divestdate, 'forecast'].iloc[0]
 
     # The return below shows the latest results in a table format.
     return render_template('predictions.html',
                            coin=coin,
                            investprice=investhigh,
+                           predicthigh=predicthigh,
                            divestdate=divestdate,
                            result=figdata_png.decode('utf8'),
                            adjusted_results=df_display.to_html())
