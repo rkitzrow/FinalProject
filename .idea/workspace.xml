@@ -4,6 +4,7 @@
     <list default="true" id="896ff376-4b42-48ed-ba34-9b39bf0f09b5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FinalProj.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinalProj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/help.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/help.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/predictions.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/predictions.html" afterDir="false" />
     </list>
     <list id="83b694d8-add4-4a16-a283-9f929c7f077d" name="Revert: Revert &quot;Revert &quot;Updating with a base template for navigation&quot;&quot;" comment="" />
@@ -149,31 +150,32 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="2" />
+          <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="5" />
+          <entry key="html" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="5" />
+          <entry key="HTML" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="697" />
-          <entry key="py" value="974" />
+          <entry key="html" value="842" />
+          <entry key="py" value="1561" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="697" />
-          <entry key="Python" value="974" />
+          <entry key="HTML" value="842" />
+          <entry key="Python" value="1561" />
         </counts>
       </usages-collector>
     </session>
@@ -219,8 +221,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/futureinvestor_page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="39" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="39" />
+            <state relative-caret-position="408">
+              <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#form#0;n#!!top" expanded="true" />
               </folding>
@@ -240,8 +242,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/FinalProj.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="154" column="48" lean-forward="true" selection-start-line="154" selection-start-column="48" selection-end-line="154" selection-end-column="48" />
+            <state relative-caret-position="-510">
+              <caret line="146" column="46" lean-forward="true" selection-start-line="146" selection-start-column="46" selection-end-line="146" selection-end-column="46" />
               <folding>
                 <element signature="e#275#343#0" expanded="true" />
               </folding>
@@ -252,8 +254,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/predictions.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+            <state relative-caret-position="255">
+              <caret line="15" column="168" selection-start-line="15" selection-start-column="168" selection-end-line="15" selection-end-column="168" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/help.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-54">
+              <caret line="94" column="62" lean-forward="true" selection-start-line="94" selection-start-column="62" selection-end-line="94" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -308,15 +319,15 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
         <option value="$PROJECT_DIR$/templates/placeholder_page.html" />
         <option value="$PROJECT_DIR$/templates/style.css" />
-        <option value="$PROJECT_DIR$/templates/help.html" />
         <option value="$PROJECT_DIR$/templates/return_page.html" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py" />
         <option value="$PROJECT_DIR$/templates/three_button_form.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/start_page.html" />
         <option value="$PROJECT_DIR$/templates/404.html" />
-        <option value="$PROJECT_DIR$/templates/futureinvestor_page.html" />
+        <option value="$PROJECT_DIR$/templates/help.html" />
         <option value="$PROJECT_DIR$/templates/predictions.html" />
+        <option value="$PROJECT_DIR$/templates/futureinvestor_page.html" />
         <option value="$PROJECT_DIR$/FinalProj.py" />
       </list>
     </option>
@@ -333,17 +344,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -355,6 +355,17 @@
               <item name="FinalProject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
           </expand>
           <select />
@@ -727,8 +738,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1035" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13435195" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13435195" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -741,7 +753,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.4977064" weight="0.33333334" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32845744" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50076455" side_tool="true" weight="0.32972974" />
-      <window_info anchor="bottom" id="Python Console" order="10" visible="true" weight="0.32741398" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="10" visible="true" weight="0.32741398" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -850,13 +862,6 @@
     <entry file="file://$PROJECT_DIR$/templates/style.css" />
     <entry file="file://$PROJECT_DIR$/templates/placeholder_page.html" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.py" />
-    <entry file="file://$PROJECT_DIR$/templates/help.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
-          <caret line="93" column="29" lean-forward="true" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/start_page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -885,13 +890,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/futureinvestor_page.html">
+    <entry file="file://$PROJECT_DIR$/templates/help.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="39" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="39" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#form#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="-54">
+          <caret line="94" column="62" lean-forward="true" selection-start-line="94" selection-start-column="62" selection-end-line="94" selection-end-column="62" />
         </state>
       </provider>
     </entry>
@@ -902,17 +904,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/futureinvestor_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#form#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/predictions.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+        <state relative-caret-position="255">
+          <caret line="15" column="168" selection-start-line="15" selection-start-column="168" selection-end-line="15" selection-end-column="168" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/FinalProj.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="154" column="48" lean-forward="true" selection-start-line="154" selection-start-column="48" selection-end-line="154" selection-end-column="48" />
+        <state relative-caret-position="-510">
+          <caret line="146" column="46" lean-forward="true" selection-start-line="146" selection-start-column="46" selection-end-line="146" selection-end-column="46" />
           <folding>
             <element signature="e#275#343#0" expanded="true" />
           </folding>
